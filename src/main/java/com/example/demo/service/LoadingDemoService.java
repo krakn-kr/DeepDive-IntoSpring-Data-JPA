@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Profile;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
 import com.example.demo.repository.RoleRepository;
@@ -16,6 +17,21 @@ public class LoadingDemoService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Transactional
+    public void demonstrateOneToOneLoading() {
+        System.out.println("\n=== ONE-TO-ONE LOADING DEMO ===");
+
+        // 1. Fetch user (profile NOT loaded yet)
+        System.out.println("1. Fetching user...");
+        User user = userRepository.findById(1L).orElseThrow();
+        System.out.println("User loaded: " + user.getName());
+
+        // 2. Access profile (triggers separate query)
+        System.out.println("\n2. Accessing profile...");
+        Profile profile = user.getProfile();
+        System.out.println("Profile loaded: " + profile.getBio());
+    }
 
     @Transactional
     public void demonstrateLazyLoading() {

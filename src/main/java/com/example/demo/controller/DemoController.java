@@ -13,6 +13,12 @@ public class DemoController {
     @Autowired
     private LoadingDemoService demoService;
 
+    @GetMapping("/one-to-one")
+    public String oneToOneDemo() {
+        demoService.demonstrateOneToOneLoading();
+        return "Check console for one-to-one loading demo";
+    }
+
     @GetMapping("/lazy")
     public String lazyDemo() {
         demoService.demonstrateLazyLoading();
