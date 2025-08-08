@@ -29,6 +29,7 @@ public class User {
     )
     @JoinColumn(name = "profile_id", unique = true)
     private Profile profile;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
